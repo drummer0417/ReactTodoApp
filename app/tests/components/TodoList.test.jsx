@@ -21,6 +21,7 @@ describe('TodoList', () => {
 
   it('Should render 5 todo items', () => {
 
+    // create mock data
     var todos =  [
       { id: 1, text: 'Cycle to Best - Oirschot - FB' },
       { id: 2, text: 'Get a coffee' },
