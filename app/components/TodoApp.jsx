@@ -3,6 +3,7 @@ var React = require('react');
 var TodoList = require('TodoList');
 var AddTodo = require('AddTodo');
 var TodoSearch = require('TodoSearch');
+var uuid = require('node-uuid');
 
 var TodoApp = React.createClass({
   getInitialState: function() {
@@ -10,22 +11,21 @@ var TodoApp = React.createClass({
       showCompleted: false,
       searchText: '',
       todos: [
-        { id: 1, text: 'Cycle to Best - Oirschot - FB' },
-        { id: 2, text: 'Get a coffee' },
-        { id: 3, text: 'Bikes to Patrick' },
-        { id: 4, text: 'Car to KwikFit to fix tire' },
-        { id: 5, text: 'Get cheep beers from EmTe' },
-      ],
-      highestId: 5
+        { id: uuid(), text: 'Cycle to Best - Oirschot - FB' },
+        { id: uuid(), text: 'Get a coffee' },
+        { id: uuid(), text: 'Bikes to Patrick' },
+        { id: uuid(), text: 'Car to KwikFit to fix tire' },
+        { id: uuid(), text: 'Get cheep beers from EmTe' },
+      ]
     }
   },
   handleAddTodo: function(text) {
-
-    var {todos, highestId} = this.state;
-    var newId = highestId + 1;
-    todos.push({id: newId, text});
-    this.setState({todos, highestId: newId});
-  },
+    this.setState(
+      {todos:  [
+        ...this.state.todos,
+        { id: uuid(), text}
+      ]}
+  )},
   handleSearch: function(showCompleted, searchText) {
     console.log('In handleSearch: text/compl: ', searchText + ' / ' + showCompleted);
     this.setState({
