@@ -15,7 +15,7 @@ describe('AddTodo', () => {
 
   it('Should call handleAddTodo and pass entered text', () => {
     var spy = expect.createSpy();
-    var addTodo = TestUtils.renderIntoDocument(<AddTodo handleAddTodo={spy} />);
+    var addTodo = TestUtils.renderIntoDocument(<AddTodo onAddTodo={spy} />);
     var $el = $(ReactDOM.findDOMNode(addTodo));
     addTodo.refs.todoText.value = "Hello";
 
@@ -25,7 +25,7 @@ describe('AddTodo', () => {
 
   it('Should not call handleAddTo as there is no valid text entered', () => {
     var spy = expect.createSpy();
-    var addTodo = TestUtils.renderIntoDocument(<AddTodo handleAddTodo={spy} />);
+    var addTodo = TestUtils.renderIntoDocument(<AddTodo onAddTodo={spy} />);
     var $el = $(ReactDOM.findDOMNode(addTodo));
     addTodo.refs.todoText.value = "";
 

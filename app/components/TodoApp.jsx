@@ -2,11 +2,13 @@ var React = require('react');
 
 var TodoList = require('TodoList');
 var AddTodo = require('AddTodo');
+var TodoSearch = require('TodoSearch');
 
 var TodoApp = React.createClass({
-
   getInitialState: function() {
     return {
+      showCompleted: false,
+      searchText: '',
       todos: [
         { id: 1, text: 'Cycle to Best - Oirschot - FB' },
         { id: 2, text: 'Get a coffee' },
@@ -24,11 +26,19 @@ var TodoApp = React.createClass({
     todos.push({id: newId, text});
     this.setState({todos, highestId: newId});
   },
+  handleSearch: function(showCompleted, searchText) {
+    console.log('In handleSearch: text/compl: ', searchText + ' / ' + showCompleted);
+    this.setState({
+      showCompleted,
+      searchText: searchText.toLowerCase()
+    })
+  },
   render: function() {
     var {todos} = this.state;
     return(
       <div>
         <h1>Todo App.nl </h1>
+        <TodoSearch onSearch={this.handleSearch} />
         <TodoList todos={todos} handleAddTodo={this.handleAddTodo} />
         <AddTodo onAddTodo={this.handleAddTodo} />
       </div>
