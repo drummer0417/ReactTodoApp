@@ -6,6 +6,10 @@ var $ = require('jQuery');
 
 var TodoApp = require('TodoApp');
 
+beforeEach(() => {
+  localStorage.removeItem('todos');
+});
+
 describe('TodoApp', () => {
 
   it('Should exist', () => {
@@ -27,14 +31,13 @@ describe('TodoApp', () => {
 
   it('Should call onToggleCompleted with te right ID', () => {
 
-    var todoItem = {id: 1, text: "A text", completed: false};
+    var todoItem = [{id: 1, text: "A text", completed: false}];
     var todoApp = TestUtils.renderIntoDocument(<TodoApp />);
-    todoApp.setState([...todoItem])
-
+    todoApp.setState({todos: todoItem})
     expect(todoApp.state.todos[0].completed === false);
 
     todoApp.handleToggleCompleted(1);
-
+console.log('todoApp.state.todos: ', todoApp.state.todos);
     expect(todoApp.state.todos[0].completed === true);
 
   });

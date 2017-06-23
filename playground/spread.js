@@ -26,3 +26,9 @@ var allNames = ['Cas', ...names,  'Anouk'];
 allNames.forEach( (name) => {
   console.log('Hi', name);
 })
+
+var todos =[];
+var todo = [{id:1, text: 'a text', completed: false}];
+
+todos = [...todo];
+console.log('todos: ',todo);

@@ -5,19 +5,19 @@ var AddTodo = require('AddTodo');
 var TodoSearch = require('TodoSearch');
 var uuid = require('node-uuid');
 
+var TodoApi = require('TodoApi');
+
 var TodoApp = React.createClass({
   getInitialState: function() {
-    return {
+      return {
       showCompleted: true,
       searchText: '',
-      todos: [
-        { id: uuid(), text: 'Cycle to Best - Oirschot - FB', completed: false },
-        { id: uuid(), text: 'Get a coffee', completed: false },
-        { id: uuid(), text: 'Bikes to Patrick', completed: true },
-        { id: uuid(), text: 'Car to KwikFit to fix tire', completed: true },
-        { id: uuid(), text: 'Get cheep beers from EmTe', completed: false },
-      ]
+      todos: TodoApi.getTodos()
     }
+  },
+  componentDidUpdate: function() {
+    // console.log('in componentDidUpdate: ', this.state.todos);
+    TodoApi.setTodos(this.state.todos);
   },
   handleAddTodo: function(text) {
     this.setState(
@@ -27,7 +27,6 @@ var TodoApp = React.createClass({
       ]}
   )},
   handleToggleCompleted: function(id) {
-    console.log('in handleToggleCompleted, id ', id);
     var updatedTodos = this.state.todos.map((todo) => {
       if (todo.id === id) {
         todo.completed = !todo.completed;
@@ -37,7 +36,6 @@ var TodoApp = React.createClass({
     this.setState({todos: updatedTodos});
   },
   handleSearch: function(showCompleted, searchText) {
-    console.log('In handleSearch: text/compl: ', searchText + ' / ' + showCompleted);
     this.setState({
       showCompleted,
       searchText: searchText.toLowerCase()

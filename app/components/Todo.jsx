@@ -8,14 +8,14 @@ var Todo = React.createClass({
   //     }
   //   )
   // },
-  render: function ( ) {
+  render: function () {
     var {text, id, completed} = this.props;
     return (
       // <div onClick={this.onToggleCompleted(id)}>
       <div onClick={() => {
           this.props.onToggleCompleted(id);
         }}>
-        <input type='checkbox' checked={completed} readOnly />
+        <input type='checkbox' checked={completed} />
         {text}
       </div>
     );
