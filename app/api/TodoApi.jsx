@@ -18,4 +18,15 @@ var getTodos = function() {
   return $.isArray(todos) ? todos: [];
 }
 
-module.exports = {setTodos, getTodos};
+var filterTodos = function(todos, showCompleted, searchText){
+  var filteredTodos = todos;
+
+  // Filer by showCompleted
+  filteredTodos = filteredTodos.filter((todo) =>{
+    return showCompleted || !todo.completed ;
+  });
+  console.log('filteredTodos:', JSON.stringify(filteredTodos, undefined, 2));
+  return filteredTodos;
+}
+
+module.exports = {setTodos, getTodos, filterTodos};
