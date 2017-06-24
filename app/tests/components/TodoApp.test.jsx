@@ -37,7 +37,6 @@ describe('TodoApp', () => {
     expect(todoApp.state.todos[0].completed === false);
 
     todoApp.handleToggleCompleted(1);
-console.log('todoApp.state.todos: ', todoApp.state.todos);
     expect(todoApp.state.todos[0].completed === true);
 
   });

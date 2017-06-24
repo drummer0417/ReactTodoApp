@@ -2,7 +2,6 @@ var $ = require('jQuery');
 
 var setTodos = function(todos) {
     if ($.isArray(todos)) {
-      console.log('in setTodos, todos: ', todos);
       localStorage.setItem('todos',  JSON.stringify(todos));
       return todos;
     }
@@ -19,13 +18,40 @@ var getTodos = function() {
 }
 
 var filterTodos = function(todos, showCompleted, searchText){
-  var filteredTodos = todos;
 
-  // Filer by showCompleted
-  filteredTodos = filteredTodos.filter((todo) =>{
-    return showCompleted || !todo.completed ;
+// filter first
+  var filteredTodos = todos.filter((todo) => {
+      return showCompleted || !todo.completed ;
   });
-  console.log('filteredTodos:', JSON.stringify(filteredTodos, undefined, 2));
+
+  // filter on searchText
+  filteredTodos = filteredTodos.filter((todo) => {
+    if (!searchText || searchText.length == 0 ) {
+      return true;
+    } else if (todo.text.toLowerCase().indexOf(searchText) === -1) {
+      return false;
+    } else {
+      return true;
+    }
+  });
+
+  // then sort
+  filteredTodos.sort((a, b) => {
+    if (!a.completed && b.completed) {
+      return -1;
+    } else if (a.completed && !b.completed) {
+      return 1;
+    } else {
+      if (a.text.toUpperCase() < b.text.toUpperCase()) {
+        return -1;
+      } else if (a.text.toUpperCase() > b.text.toUpperCase()){
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+  });
+
   return filteredTodos;
 }
 
