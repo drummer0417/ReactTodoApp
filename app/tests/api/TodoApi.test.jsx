@@ -87,7 +87,7 @@ describe('TodoApi', () => {
      })
 
      it('Should return all todos with searchText equal to the given searchText', () => {
-       var filteredTodos = TodoApi.filterTodos(todos, true, 'other text');
+       var filteredTodos = TodoApi.filterTodos(todos, true, 'OTHER Text');
       //  expect(filteredTodos.length).toBe(1);
        expect(filteredTodos[0].text).toBe('other Text');
      })

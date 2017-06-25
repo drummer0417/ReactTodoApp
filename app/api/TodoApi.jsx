@@ -19,6 +19,8 @@ var getTodos = function() {
 
 var filterTodos = function(todos, showCompleted, searchText){
 
+searchText = searchText.toLowerCase();
+
 // filter first
   var filteredTodos = todos.filter((todo) => {
       return showCompleted || !todo.completed ;
@@ -41,10 +43,14 @@ var filterTodos = function(todos, showCompleted, searchText){
       return -1;
     } else if (a.completed && !b.completed) {
       return 1;
-    } else {
-      if (a.text.toUpperCase() < b.text.toUpperCase()) {
+    } else { // a.completed and b.completed are equal
+
+      var sortDateA = a.completed? a.completedAt: a.createdAt;
+      var sortDateB = b.completed? b.completedAt: b.createdAt;
+
+      if (sortDateA > sortDateB) {
         return -1;
-      } else if (a.text.toUpperCase() > b.text.toUpperCase()){
+      } else if (sortDateA < sortDateB){
         return 1;
       } else {
         return 0;

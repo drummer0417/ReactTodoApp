@@ -25,20 +25,49 @@ describe('TodoApp', () => {
     todoApp.handleAddTodo(todoText);
 
     var {todos} = todoApp.state;
-    expect(todos.length).toBe(1);
-    expect(todos[0].text).toBe(todoText);
+    var todo = todos[0];
+    // expect(todos.length).toBe(1);
+    expect(todo.text).toBe(todoText);
+    expect(todo.createdAt).toBeA('number');
+    expect(todo.completedAt).toNotExist();
   });
 
-  it('Should call onToggleCompleted with te right ID', () => {
+    it('Should call onToggleCompleted with te right ID', () => {
 
-    var todoItem = [{id: 1, text: "A text", completed: false}];
-    var todoApp = TestUtils.renderIntoDocument(<TodoApp />);
-    todoApp.setState({todos: todoItem})
-    expect(todoApp.state.todos[0].completed === false);
+      var todoItem = [{
+        id: 1,
+        text: "A text",
+        createdAt: 0,
+        completedAt: undefined,
+        completed: false
+      }];
+      var todoApp = TestUtils.renderIntoDocument(<TodoApp />);
+      todoApp.setState({todos: todoItem})
+      expect(todoApp.state.todos[0].completed === false);
 
-    todoApp.handleToggleCompleted(1);
-    expect(todoApp.state.todos[0].completed === true);
+      todoApp.handleToggleCompleted(1);
+      var todo = todoApp.state.todos[0];
+      expect(todo.completed === true);
+      expect(todo.completedAt).toBeA('number');
 
-  });
+    });
+
+    it('Should remove completedAt when toggled from completed to not compled', () => {
+
+      var todoItem = [{
+        id: 1,
+        text: "A text",
+        createdAt: 4324323424,
+        completedAt: 234424,
+        completed: true
+      }];
+      var todoApp = TestUtils.renderIntoDocument(<TodoApp />);
+      todoApp.setState({todos: todoItem});
+      expect(todoApp.state.todos[0].completed === true);
+
+      todoApp.handleToggleCompleted(1);
+      expect(todoApp.state.todos[0].completed === false);
+      expect(todoApp.state.todos[0].completedAt).toNotExist();
+    });
 
 });
