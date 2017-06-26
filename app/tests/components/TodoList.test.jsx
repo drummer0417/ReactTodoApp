@@ -10,17 +10,10 @@ var Todo = require('Todo');
 describe('TodoList', () => {
 
   it('Should exist', () => {
-
-    expect(TodoList).toExist();
-  });
-
-  it('Should exist2', () => {
-
     expect(TodoList).toExist();
   });
 
   it('Should render 5 todo items', () => {
-
     // create mock data
     var todos =  [
       { id: 1, text: 'Cycle to Best - Oirschot - FB' },
@@ -39,6 +32,12 @@ describe('TodoList', () => {
 
   });
 
+  it('Should render no todo\'s message if no todos to display', () => {
+    // create mock data
+    var todos =  [];
+    var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
+    var $el = $(ReactDOM.findDOMNode(todoList));
 
-
+    expect($el.find('.container__message').length).toBe(1);
+  });
 });
