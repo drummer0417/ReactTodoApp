@@ -32,3 +32,7 @@ var todo = [{id:1, text: 'a text', completed: false}];
 
 todos = [...todo];
 console.log('todos: ',todo);
+
+var todo = {id: 1, text: "test 1"};
+var newTodo =  {...todo}, completed: true;
+console.log('newTodo: ' + JSON.stringify(newTodo));

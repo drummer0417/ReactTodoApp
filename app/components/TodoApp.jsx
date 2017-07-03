@@ -39,7 +39,7 @@ var TodoApp = React.createClass({
         todo.completedAt = todo.completed? moment().unix(): undefined;
       }
       return todo;
-    })
+    });
     this.setState({todos: updatedTodos});
   },
   handleSearch: function(showCompleted, searchText) {
@@ -56,7 +56,7 @@ var TodoApp = React.createClass({
       <div>
         <h1 className='page-title'>Todo App</h1>
         <div className='row'>
-          <div className='column small-centered small-11 medium-6 large-5 '>
+          <div className='column small-centered small-12 medium-11 large-5 '>
             <div className='container'>
               <TodoSearch onSearch={this.handleSearch} />
               <TodoList todos={filteredTodos} handleAddTodo={this.handleAddTodo} onToggleCompleted={this.handleToggleCompleted} />
