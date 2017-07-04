@@ -10,7 +10,7 @@ export var searchTextReducer = (state = '', action) => {
   };
 }
 
-export var toggleShowCompletedReducer = (state = false, action) => {
+export var showCompletedReducer = (state = false, action) => {
   switch (action.type) {
     case 'TOGGLE_SHOW_COMPLETED':
       return !state;
@@ -21,6 +21,7 @@ export var toggleShowCompletedReducer = (state = false, action) => {
 
 export var todosReducer = (state = [], action) => {
   switch (action.type){
+
     case 'ADD_TODO':
       var timestamp = moment().unix();
       return [...state,
@@ -30,21 +31,22 @@ export var todosReducer = (state = [], action) => {
           completedAt: undefined,
           completed: false
         }];
+
     case 'TOGGLE_TODO':
+
       var updatedTodos = state.map((todo) => {
         if (todo.id === action.id) {
-
           var newTodo = {
             ...todo,
             completed: !todo.completed,
-            completedAt: todo.completed? undefined: moment().unix(
+            completedAt: todo.completed? undefined: moment().unix()
             }
           return newTodo;
-
-        } else {
-          return todo;
+          } else {
+            return todo;
         }
       });
+      // return state;
       return updatedTodos;
     default:
       return state;

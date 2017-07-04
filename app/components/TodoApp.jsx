@@ -2,9 +2,9 @@ var React = require('react');
 var uuid = require('node-uuid');
 var moment = require('moment');
 
-var TodoList = require('TodoList');
-var AddTodo = require('AddTodo');
-var TodoSearch = require('TodoSearch');
+import TodoList from 'TodoList';
+import AddTodo from 'AddTodo';
+import TodoSearch from 'TodoSearch';
 
 var TodoApi = require('TodoApi');
 
@@ -19,29 +19,29 @@ var TodoApp = React.createClass({
   componentDidUpdate: function() {
     TodoApi.setTodos(this.state.todos);
   },
-  handleAddTodo: function(text) {
-    var timestamp = moment().unix();
-    this.setState(
-      {todos:  [
-        ...this.state.todos,
-        { id: uuid(),
-          text,
-          createdAt: timestamp,
-          completedAt: undefined,
-          completed: false
-        }
-      ]}
-  )},
-  handleToggleCompleted: function(id) {
-    var updatedTodos = this.state.todos.map((todo) => {
-      if (todo.id === id) {
-        todo.completed = !todo.completed;
-        todo.completedAt = todo.completed? moment().unix(): undefined;
-      }
-      return todo;
-    });
-    this.setState({todos: updatedTodos});
-  },
+  // handleAddTodo: function(text) {
+  //   var timestamp = moment().unix();
+  //   this.setState(
+  //     {todos:  [
+  //       ...this.state.todos,
+  //       { id: uuid(),
+  //         text,
+  //         createdAt: timestamp,
+  //         completedAt: undefined,
+  //         completed: false
+  //       }
+  //     ]}
+  // )},
+  // handleToggleCompleted: function(id) {
+  //   var updatedTodos = this.state.todos.map((todo) => {
+  //     if (todo.id === id) {
+  //       todo.completed = !todo.completed;
+  //       todo.completedAt = todo.completed? moment().unix(): undefined;
+  //     }
+  //     return todo;
+  //   });
+  //   this.setState({todos: updatedTodos});
+  // },
   handleSearch: function(showCompleted, searchText) {
     this.setState({
       showCompleted,
@@ -59,8 +59,8 @@ var TodoApp = React.createClass({
           <div className='column small-centered small-12 medium-11 large-5 '>
             <div className='container'>
               <TodoSearch onSearch={this.handleSearch} />
-              <TodoList todos={filteredTodos} handleAddTodo={this.handleAddTodo} onToggleCompleted={this.handleToggleCompleted} />
-              <AddTodo onAddTodo={this.handleAddTodo} />
+              <TodoList />
+              <AddTodo  />
             </div>
           </div>
         </div>

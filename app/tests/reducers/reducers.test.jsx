@@ -30,14 +30,14 @@ describe('Reducers', () => {
     });
   });
 
-  describe('toggleShowCompletedReducer', () => {
+  describe('showCompletedReducer', () => {
 
     it('Should return the toggled showCompleted value, true in this case', () => {
       var state = false;
       var action = {
         type: 'TOGGLE_SHOW_COMPLETED'
       };
-      expect(reducers.toggleShowCompletedReducer(df(state), df(action))).toBe(true);
+      expect(reducers.showCompletedReducer(df(state), df(action))).toBe(true);
     });
 
     it('Should return the toggled showCompleted value, false in this case', () => {
@@ -45,7 +45,7 @@ describe('Reducers', () => {
       var action = {
         type: 'TOGGLE_SHOW_COMPLETED'
       };
-      expect(reducers.toggleShowCompletedReducer(df(state), df(action))).toBe(false);
+      expect(reducers.showCompletedReducer(df(state), df(action))).toBe(false);
     });
 
     it('Should return the toggled showCompleted value, true in this case', () => {
@@ -53,7 +53,7 @@ describe('Reducers', () => {
       var action = {
         type: 'TOGGLE_SHOW_COMPLETED'
       };
-      expect(reducers.toggleShowCompletedReducer(df(state), df(action))).toBe(true);
+      expect(reducers.showCompletedReducer(df(state), df(action))).toBe(true);
     });
 
     it('Should return the default state if unknow type, which is false', () => {
@@ -62,7 +62,7 @@ describe('Reducers', () => {
         type: "unknown",
         toggleShowCompleted: false
       }
-      expect(reducers.toggleShowCompletedReducer(df(state), df(action))).toBe(false);
+      expect(reducers.showCompletedReducer(df(state), df(action))).toBe(false);
     });
   });
 

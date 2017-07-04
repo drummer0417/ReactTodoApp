@@ -1,9 +1,12 @@
 var React = require('react');
+var {connect} = require('react-redux');
 
-var Todo = require('Todo');
+// var Todo = require('Todo');         ------- replace this require by import to be able to
+//                                     ------- grab the defalt (export default....)
+import Todo from 'Todo';
 var AddTodo = require('AddTodo');
 
-var TodoList = React.createClass({
+export var TodoList = React.createClass({
 
   render: function () {
     var {todos} = this.props;
@@ -13,7 +16,7 @@ var TodoList = React.createClass({
         return<p className="container__message">You've got nothing to do</p>
       }
       return todos.map((todo) => {
-        return (<Todo key={todo.id} {...todo} onToggleCompleted={this.props.onToggleCompleted}/>)
+        return (<Todo key={todo.id} {...todo} />)
       });
     };
 
@@ -25,4 +28,8 @@ var TodoList = React.createClass({
   }
 });
 
-module.exports = TodoList;
+export default connect((state) => {
+  return {
+    todos: state.todos
+  };
+}) (TodoList);
