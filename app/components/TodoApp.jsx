@@ -5,8 +5,9 @@ var moment = require('moment');
 import TodoList from 'TodoList';
 import AddTodo from 'AddTodo';
 import TodoSearch from 'TodoSearch';
+import {connect} from 'react-redux';
 
-var TodoApi = require('TodoApi');
+export var TodoApi = require('TodoApi');
 
 var TodoApp = React.createClass({
   getInitialState: function() {
@@ -42,12 +43,12 @@ var TodoApp = React.createClass({
   //   });
   //   this.setState({todos: updatedTodos});
   // },
-  handleSearch: function(showCompleted, searchText) {
-    this.setState({
-      showCompleted,
-      searchText: searchText
-    })
-  },
+  // handleSearch: function(showCompleted, searchText) {
+  //   this.setState({
+  //     showCompleted,
+  //     searchText: searchText
+  //   })
+  // },
   render: function() {
     var {todos, showCompleted, searchText} = this.state;
     var filteredTodos = TodoApi.filterTodos(todos, showCompleted, searchText);
@@ -70,3 +71,6 @@ var TodoApp = React.createClass({
 });
 
 module.exports = TodoApp;
+// export default connect((state) => {
+//   return state;
+// }) (TodoApp);

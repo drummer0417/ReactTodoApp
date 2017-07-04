@@ -4,18 +4,20 @@ var {connect} = require('react-redux');
 // var Todo = require('Todo');         ------- replace this require by import to be able to
 //                                     ------- grab the defalt (export default....)
 import Todo from 'Todo';
-var AddTodo = require('AddTodo');
+import TodoApi from 'TodoApi';
+import AddTodo from 'AddTodo';
 
 export var TodoList = React.createClass({
 
   render: function () {
-    var {todos} = this.props;
+    var {todos, showCompleted, searchText} = this.props;
 
     var renderTodos = () => {
-      if (todos.length === 0) {
+      var filteredTodos = TodoApi.filterTodos(todos, showCompleted, searchText);
+      if (filteredTodos.length === 0) {
         return<p className="container__message">You've got nothing to do</p>
       }
-      return todos.map((todo) => {
+      return filteredTodos.map((todo) => {
         return (<Todo key={todo.id} {...todo} />)
       });
     };
@@ -29,7 +31,5 @@ export var TodoList = React.createClass({
 });
 
 export default connect((state) => {
-  return {
-    todos: state.todos
-  };
+  return state
 }) (TodoList);
