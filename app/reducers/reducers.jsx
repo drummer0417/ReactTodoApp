@@ -22,6 +22,9 @@ export var showCompletedReducer = (state = false, action) => {
 export var todosReducer = (state = [], action) => {
   switch (action.type){
 
+    case 'INITIALIZE_TODOS':
+      return action.initialTodos;
+
     case 'ADD_TODO':
       var timestamp = moment().unix();
       return [...state,
@@ -48,15 +51,6 @@ export var todosReducer = (state = [], action) => {
       });
       // return state;
       return updatedTodos;
-    default:
-      return state;
-  };
-};
-
-export var toggleTodoReducer = (state = -1, action) => {
-  switch (action.type){
-    case 'TOGGLE_TODO':
-      return action.id;
     default:
       return state;
   };

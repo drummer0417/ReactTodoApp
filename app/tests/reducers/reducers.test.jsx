@@ -139,26 +139,20 @@ describe('Reducers', () => {
       // expect(seconds).toBeGreaterThan(0);
     });
 
-  });
-
-  describe('toggleTodoReducer', () => {
-
-    it('Should return the id', () => {
-      var state = -1;
+    it('Should add initial todos', () => {
+      var initialTodos = [
+        {id: 1, text: 'todo 1', completed: false, createdAt: 23423434},
+        {id: 2, text: 'todo 2', completed: true, createdAt: 23423444},
+        {id: 3, text: 'todo 3', completed: false, createdAt: 23423554}
+      ];
       var action = {
-        type: 'TOGGLE_TODO',
-        id: 123
+        type: 'INITIALIZE_TODOS',
+        initialTodos: initialTodos
       };
-      expect(reducers.toggleTodoReducer(df(state), df(action))).toBe(123);
-    });
+      var res = reducers.todosReducer(df([]), df(action));
 
-    it('Should return the id, -1 in case of unknown action.type', () => {
-      var state = -1;
-      var action = {
-        type: 'unknown',
-        id: 123
-      };
-      expect(reducers.toggleTodoReducer(df(state), df(action))).toBe(-1);
-    });
+      expect(res.length).toBe(initialTodos.length);
+      expect(res[1]).toEqual(initialTodos[1]);
+    })
   });
 });

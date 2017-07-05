@@ -19,7 +19,7 @@ var getTodos = function() {
 
 var filterTodos = function(todos, showCompleted, searchText){
 
-searchText = searchText.toLowerCase();
+searchText = searchText?  searchText.toLowerCase() : "";
 
 // filter first
   var filteredTodos = todos.filter((todo) => {
