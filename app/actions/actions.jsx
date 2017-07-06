@@ -33,15 +33,14 @@ export var startInitializeTodos = () => {
   return (dispatch, getState) => {
     firebaseRef.child('todos').once('value')
     .then((snapshot) => {
-      var todosArray = [];
-      var todoElements = undefined;
-      var todosKeys = Object.keys(snapshot.val());
-      // console.log('todos: ', todos);
-      todos.forEach((key) => {
-        todoValues = todoKesy[key];
-        todosArray = [...todosArray, {id: key, ...todoElements}]
+      var initialTodos = [];
+      var todoKeysObject = snapshot.val();
+      var todoKeysArray = Object.keys(todoKeysObject);
+
+      todoKeysArray.forEach((key) => {
+        initialTodos = [...initialTodos, {id: key, ...todoKeysObject[key]}]
       })
-      dispatch(initializeTodos(todosArray));
+       dispatch(initializeTodos(initialTodos));
     });
   }
 };
