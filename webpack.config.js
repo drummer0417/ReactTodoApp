@@ -25,9 +25,10 @@ module.exports = {
     root: __dirname,
     modulesDirectories: [
       'node_modules',
-      './app/components',
       './app/api',
       './app/actions',
+      './app/components',
+      './app/firebase',
       './app/reducers',
       './app/store'
     ],

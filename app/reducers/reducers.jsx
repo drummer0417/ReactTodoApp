@@ -23,17 +23,13 @@ export var todosReducer = (state = [], action) => {
   switch (action.type){
 
     case 'INITIALIZE_TODOS':
+    console.log('initialTodos', action.initialTodos);
       return action.initialTodos;
 
     case 'ADD_TODO':
-      var timestamp = moment().unix();
       return [...state,
-        { id: uuid(),
-          text: action.text,
-          createdAt: timestamp,
-          completedAt: undefined,
-          completed: false
-        }];
+        action.todo
+      ];
 
     case 'TOGGLE_TODO':
 

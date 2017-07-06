@@ -9,14 +9,17 @@ var TodoApp = require('TodoApp');
 var TodoApi = require('TodoApi');
 var actions = require('actions');
 
+// import './../playground/firebase/index';
 store.subscribe(() => {
   var state = store.getState();
   TodoApi.setTodos(state.todos);
-  console.log('Store: New state: ' + JSON.stringify(state, undefined, 2));
+  console.log('Store: New state: ', state);
 });
 
-var initialTodos = TodoApi.getTodos();
-store.dispatch(actions.initializeTodos(initialTodos));
+// var initialTodos = TodoApi.getTodos();
+store.dispatch(actions.startInitializeTodos());
+// store.dispatch(actions.initializeTodos(initialTodos));
+
 // Load foundation
 // require('style!css!foundation-sites/dist/css/foundation.min.css');
 $(document).foundation();
