@@ -13,7 +13,7 @@ export var startAddTodo = (text) => {
     };
     var todoRef = firebaseRef.child('todos').push(todo)
 
-    todoRef.then(() =>{
+    return todoRef.then(() =>{
       dispatch(addTodo({
           ...todo,
           id: todoRef.key
@@ -40,7 +40,7 @@ export var startInitializeTodos = () => {
       todoKeysArray.forEach((key) => {
         initialTodos = [...initialTodos, {id: key, ...todoKeysObject[key]}]
       })
-       dispatch(initializeTodos(initialTodos));
+      return dispatch(initializeTodos(initialTodos));
     });
   }
 };

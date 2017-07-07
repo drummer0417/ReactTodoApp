@@ -70,18 +70,19 @@ describe('Reducers', () => {
 
     it('Should return array with new todo', () => {
       var state = [];
-      var action = {
-        type: 'ADD_TODO',
-        text: 'implement todosReducer test case'
-        }
-      var result = {
+      var todo = {
+        id: '123',
         text: 'implement todosReducer test case',
         completed: false,
         completedAt: undefined
       };
+      var action = {
+        type: 'ADD_TODO',
+        todo
+      }
 
       expect(reducers.todosReducer(df(state), df(action)).length).toBe(1);
-      expect(reducers.todosReducer(df(state), df(action))[0]).toContain(result);
+      expect(reducers.todosReducer(df(state), df(action))[0]).toContain(todo);
     });
 
     it('Should toggle state to completed and fill date completed', () => {

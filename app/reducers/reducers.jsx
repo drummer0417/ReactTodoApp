@@ -23,7 +23,7 @@ export var todosReducer = (state = [], action) => {
   switch (action.type){
 
     case 'INITIALIZE_TODOS':
-    console.log('initialTodos', action.initialTodos);
+    // console.log('initialTodos', action.initialTodos);
       return action.initialTodos;
 
     case 'ADD_TODO':

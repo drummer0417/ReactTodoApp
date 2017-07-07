@@ -1,5 +1,10 @@
-var expect = require('expect');
-var actions = require('actions');
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk';
+import expect from 'expect';
+
+import * as actions from 'actions';
+
+var createMockStore = configureMockStore([thunk]);
 
 describe('Actions', () => {
 
@@ -28,13 +33,52 @@ describe('Actions', () => {
   })
 
   it('Should generate addTodo action', () => {
+    var todo: {
+      text: 'A new todo',
+      completd: false,
+      createdAt: 123,
+      completedAt: undefined
+    }
     var action =  {
       type: 'ADD_TODO',
-      text: 'A new todo'
+      todo
     }
 
-    expect(actions.addTodo('A new todo')).toEqual(action);
+    expect(actions.addTodo(todo)).toEqual(action);
   });
+
+  it('Should create todo and dispatch ADD_TODO', (done) => {
+
+    const store = createMockStore({});
+    const todoText = 'Perform Async test';
+
+    store.dispatch(actions.startAddTodo(todoText)).then(() => {
+
+      const actions = store.getActions();
+      expect(actions[0]).toInclude({type: 'ADD_TODO'});
+      expect(actions[0].todo).toInclude({text: todoText});
+      done();
+     }).catch(done);
+   });
+
+
+
+    // it('should create todo and dispatch ADD_TODO', (done) => {
+    //   const store = createMockStore({});
+    //   const todoText = 'My todo item';
+    //
+    //   store.dispatch(actions.startAddTodo(todoText)).then(() => {
+    //     const actions = store.getActions();
+    //     expect(actions[0]).toInclude({
+    //       type: 'ADD_TODO'
+    //     });
+    //     expect(actions[0].todo).toInclude({
+    //       text: todoText
+    //     });
+    //     done();
+    //   }).catch(done);
+    // });
+
 
   it('Should generate toggelShowCompleted action', () => {
     var action =  {
