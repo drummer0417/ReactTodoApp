@@ -88,56 +88,38 @@ describe('Reducers', () => {
     it('Should toggle state to completed and fill date completed', () => {
       var state = [
         {id: 100, text: 'first todo', createdAt: moment().unix(), completed: false, completedAt: undefined},
-        {
-          id: 123,
-          text: 'implement todosReducer test case',
-          createdAt: moment().unix(),
-          completed: false,
-          completedAt: undefined
-        },
+        {id: 123, text: 'implement todosReducer test case', createdAt: moment().unix(), completed: false, completedAt: undefined},
         {id: 200, text: 'last todo', createdAt: moment().unix(), completed: false, completedAt: undefined}
       ];
       var action = {
-        type: 'TOGGLE_TODO',
-        id: 123
+        type: 'UPDATE_TODO',
+        id: 123,
+        updates: {completed: true, completedAt: 435454345},
       };
-      var result = {
-        text: 'implement todosReducer test case',
-        completed: true
-      };
+
       var newTodos = reducers.todosReducer(df(state), df(action));
-      expect(newTodos[1]).toContain(result);
+      expect(newTodos[1].completed).toBe(true);
       expect(newTodos.length).toBe(3);;
       var seconds = parseInt(newTodos[1].completedAt);
-      expect(seconds).toBeGreaterThan(0);
+      expect(seconds).toBe(435454345);
     });
 
     it('Should toggle state completed to false and clear date completed', () => {
       var state = [
         {id: 100, text: 'first todo', createdAt: moment().unix(), completed: false, completedAt: undefined},
-        {
-          id: 123,
-          text: 'implement todosReducer test case',
-          createdAt: moment().unix(),
-          completed: true,
-          completedAt: 22433234324
-        },
+        {id: 123, text: 'implement todosReducer test case', createdAt: moment().unix(), completed: true, completedAt: 123232131},
         {id: 200, text: 'last todo', createdAt: moment().unix(), completed: false, completedAt: undefined}
       ];
       var action = {
-        type: 'TOGGLE_TODO',
-        id: 123
-      };
-      var result = {
-        text: 'implement todosReducer test case',
-        completed: false,
-        completedAt: undefined
+        type: 'UPDATE_TODO',
+        id: 123,
+        updates: {completed: false, completedAt: undefined},
       };
       var newTodos = reducers.todosReducer(df(state), df(action));
-      expect(newTodos[1]).toContain(result);
-      // expect(newTodos.length).toBe(3);;
-      // var seconds = parseInt(newTodos[1].completedAt);
-      // expect(seconds).toBeGreaterThan(0);
+
+      expect(newTodos.length).toBe(3);
+      expect(newTodos[1].completed).toBe(false);
+      expect(newTodos[1].completedAt).toBe(undefined);
     });
 
     it('Should add initial todos', () => {

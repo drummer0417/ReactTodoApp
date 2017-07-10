@@ -11,9 +11,8 @@ export var startAddTodo = (text) => {
       completedAt: null,
       completed: false
     };
-    var todoRef = firebaseRef.child('todos').push(todo)
-
-    return todoRef.then(() =>{
+    var todoRef = firebaseRef.child('todos').push(todo);
+    return todoRef.then(() => {
       dispatch(addTodo({
           ...todo,
           id: todoRef.key
@@ -67,17 +66,18 @@ export var toggleShowCompleted = () => {
 };
 
 export var startToggleTodo = (id, completed) => {
-   return (dispatch, getState) => {
-      var todoRef = firebaseRef.child('todos/' + id);
-      var updates = {
-        completed: completed,
-        completedAt: completed? moment().unix(): null
-      };
-      todoRef.update(updates).then(() => {
-        return dispatch(updateTodo(id, updates));
-      })
-   };
-};
+
+  return (dispatch, getState) => {
+    var todoRef = firebaseRef.child('todos/' + id);
+    var updates = {
+      completed: completed,
+      completedAt: completed? moment().unix(): null
+    };
+    return todoRef.update(updates).then(() => {
+      dispatch(updateTodo(id, updates));
+    });
+  };
+}
 
 export var updateTodo = (id, updates)  => {
   return {
