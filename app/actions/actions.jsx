@@ -30,16 +30,15 @@ export var addTodo = (todo) => {
 
 export var startInitializeTodos = () => {
   return (dispatch, getState) => {
-    firebaseRef.child('todos').once('value')
-    .then((snapshot) => {
+    return firebaseRef.child('todos').once('value').then((snapshot) => {
       var initialTodos = [];
-      var todoKeysObject = snapshot.val();
+      var todoKeysObject = snapshot.val() || {};
       var todoKeysArray = Object.keys(todoKeysObject);
 
       todoKeysArray.forEach((key) => {
         initialTodos = [...initialTodos, {id: key, ...todoKeysObject[key]}]
       })
-      return dispatch(initializeTodos(initialTodos));
+      dispatch(initializeTodos(initialTodos));
     });
   }
 };
