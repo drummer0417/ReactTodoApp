@@ -10,7 +10,6 @@ var TodoApi = require('TodoApi');
 var actions = require('actions');
 
 // import './../playground/firebase/index';
-
 // var initialTodos = TodoApi.getTodos();
 store.dispatch(actions.startInitializeTodos());
 // store.dispatch(actions.initializeTodos(initialTodos));
