@@ -9,6 +9,8 @@ var TodoApp = require('TodoApp');
 var TodoApi = require('TodoApi');
 var actions = require('actions');
 
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+console.log('process.env.DATABASE_URL', process.env.DATABASE_URL);
 // import './../playground/firebase/index';
 // var initialTodos = TodoApi.getTodos();
 store.dispatch(actions.startInitializeTodos());

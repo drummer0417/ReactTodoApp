@@ -1,19 +1,25 @@
 import firebase from 'firebase';
 
+console.log('in initFirebase');
+console.log('apiKey', process.env.API_KEY);
+console.log('authDomain', process.env.AUTH_DOMAIN);
+console.log('databaseURL', process.env.DATABASE_URL);
+console.log('storageBucket', process.env.STORAGE_BUCKET);
+
 try {
   // Initialize Firebase
   var config = {
-    apiKey: "AIzaSyBveYhNFrGbgug71fX63MZuP5_BnmRuK_w",
-    authDomain: "hanstodoapp.firebaseapp.com",
-    databaseURL: "https://hanstodoapp.firebaseio.com",
-    projectId: "hanstodoapp",
-    storageBucket: "hanstodoapp.appspot.com",
-    messagingSenderId: "1088487406021"
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    storageBucket: process.env.STORAGE_BUCKET
   };
+  console.log('fb config', config);
 
   firebase.initializeApp(config);
-} catch (e) {
 
+} catch (e) {
+  console.log('error init firebase:', e);
 } finally {
 
 }
