@@ -59,6 +59,7 @@ module.exports = {
       './app/components',
       './app/firebase',
       './app/reducers',
+      './app/router',
       './app/store'
     ],
     alias: {
