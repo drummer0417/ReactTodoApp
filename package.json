@@ -4,7 +4,7 @@
   "description": "React boilerplate app",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test karma start",
+    "test": "cross-env NODE_ENV=test karma start",
     "test-watch": "nodemon --exec \"npm test\"",
     "build": "webpack",
     "start": "npm run build && node server.js"
@@ -44,6 +44,7 @@
     "webpack": "^1.12.13"
   },
   "devDependencies": {
+    "cross-env": "^5.0.1",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^0.2.2",
     "karma-mocha": "^0.2.2",

@@ -1,4 +1,4 @@
-import firebase, {firebaseRef} from 'initFirebase';
+import firebase, {firebaseRef, githubProvider} from 'initFirebase';
 import moment from 'moment';
 
 import actions from 'actions';
@@ -85,3 +85,22 @@ export var updateTodo = (id, updates)  => {
     updates
   };
 };
+
+export var startLogin = () => {
+  console.log('in startLogin()');
+  return (dispatch, getState) => {
+    return firebase.auth().signInWithPopup(githubProvider).then((result) => {
+      console.log('Authentication OK: ', result);
+    }, (error) => {
+      console.log('Unable to authenticate: ', error);
+    });
+  };
+}
+
+export var startLogout = () => {
+  return (dispatch, getState) =>  {
+    return firebase.auth().signOut().then(() => {
+      console.log('Succesfully logged out');
+    });
+  }
+}
