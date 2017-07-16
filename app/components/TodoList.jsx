@@ -10,9 +10,10 @@ import AddTodo from 'AddTodo';
 export var TodoList = React.createClass({
 
   render: function () {
-    var {todos, showCompleted, searchText} = this.props;
+    var {todos, showCompleted, searchText, auth} = this.props;
 
     var renderTodos = () => {
+      // console.log('uid::::::::: ', auth.uid);
       var filteredTodos = TodoApi.filterTodos(todos, showCompleted, searchText);
       if (filteredTodos.length === 0) {
         return<p className="container__message">You've got nothing to do</p>

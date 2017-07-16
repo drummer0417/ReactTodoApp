@@ -87,20 +87,39 @@ export var updateTodo = (id, updates)  => {
 };
 
 export var startLogin = () => {
-  console.log('in startLogin()');
   return (dispatch, getState) => {
+    console.log('before call firebase');
     return firebase.auth().signInWithPopup(githubProvider).then((result) => {
-      console.log('Authentication OK: ', result);
+      console.log('user.uid', result.user.uid);
+      // dispatch(login(result.user.uid));
     }, (error) => {
       console.log('Unable to authenticate: ', error);
     });
+    // return firebase.auth().signInWithRedirect(githubProvider).then((result) => {
+    //   console.log('Authentication OK: ', result);
+    // }, (error) => {
+    //   console.log('Unable to authenticate: ', error);
+    // });
   };
 }
 
 export var startLogout = () => {
   return (dispatch, getState) =>  {
     return firebase.auth().signOut().then(() => {
-      console.log('Succesfully logged out');
+      // dispatch(logout());
     });
+  }
+}
+
+export var login = (uid) => {
+  return {
+    type: 'LOGIN',
+    uid
+  }
+}
+
+export var logout = () => {
+  return {
+    type: 'LOGOUT'
   }
 }

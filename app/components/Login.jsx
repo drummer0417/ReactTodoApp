@@ -11,6 +11,7 @@ export var Login = React.createClass({
     dispatch(actions.startLogin());
   },
   render() {
+    var {auth} = this.props;
     return (
       <div>
         <h1 className="page-title">Todo App</h1>;
@@ -28,4 +29,6 @@ export var Login = React.createClass({
   }
 })
 
-export default redux.connect() (Login);
+export default redux.connect((state) => {
+  return state
+})  (Login);

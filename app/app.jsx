@@ -12,18 +12,16 @@ import router from 'router';
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
-    console.log('push to /todos');
+    console.log('in onAuthStateChanged, user: ', user);
+    store.dispatch(actions.startInitializeTodos());
+    store.dispatch(actions.login(user.uid));
     hashHistory.push('/todos');
   } else {
-    console.log('push to /');
     hashHistory.push('/');
+    store.dispatch(actions.logout());
   }
 });
 
-
-// import './../playground/firebase/index';
-
-store.dispatch(actions.startInitializeTodos());
 
 // Load foundation
 // require('style!css!foundation-sites/dist/css/foundation.min.css');

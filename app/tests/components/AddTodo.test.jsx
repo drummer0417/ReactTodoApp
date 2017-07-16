@@ -4,7 +4,7 @@ var ReactDOM = require('react-dom');
 var TestUtils = require('react-addons-test-utils');
 var $ = require('jQuery');
 
-var {AddTodo} = require('AddTodo');
+import  {AddTodo} from 'AddTodo';
 import * as actions from 'actions';
 
 describe('AddTodo', () => {
