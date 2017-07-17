@@ -21,8 +21,6 @@ firebase.auth().onAuthStateChanged((user) => {
     store.dispatch(actions.logout());
   }
 });
-
-
 // Load foundation
 // require('style!css!foundation-sites/dist/css/foundation.min.css');
 $(document).foundation();

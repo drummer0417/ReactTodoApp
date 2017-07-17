@@ -137,6 +137,22 @@ describe('Reducers', () => {
       expect(res.length).toBe(initialTodos.length);
       expect(res[1]).toEqual(initialTodos[1]);
     })
+
+    it('Should cleanup todos on logout', () => {
+      var initialTodos = [
+        {id: 1, text: 'todo 1', completed: false, createdAt: 23423434},
+        {id: 2, text: 'todo 2', completed: true, createdAt: 23423444},
+        {id: 3, text: 'todo 3', completed: false, createdAt: 23423554}
+      ];
+      var cleanedUpTodos = [];
+      var action = {
+        type: 'CLEANUP_TODOS'
+      };
+      var res = reducers.todosReducer(df(initialTodos), df(action));
+
+      expect(res.length).toBe(0);
+    })
+
   });
 
   describe('authReducer', () => {

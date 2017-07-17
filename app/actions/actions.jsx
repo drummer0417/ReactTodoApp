@@ -123,6 +123,7 @@ export var login = (uid) => {
     type: 'LOGIN',
     uid
   }
+
 }
 
 export var logout = () => {
