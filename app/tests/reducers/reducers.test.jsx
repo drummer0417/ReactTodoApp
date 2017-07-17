@@ -146,7 +146,7 @@ describe('Reducers', () => {
       ];
       var cleanedUpTodos = [];
       var action = {
-        type: 'CLEANUP_TODOS'
+        type: 'LOGOUT'
       };
       var res = reducers.todosReducer(df(initialTodos), df(action));
 
