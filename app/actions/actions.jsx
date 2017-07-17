@@ -11,7 +11,8 @@ export var startAddTodo = (text) => {
       completedAt: null,
       completed: false
     };
-    var todoRef = firebaseRef.child('todos').push(todo);
+    var uid = getState().auth.uid;
+    var todoRef = firebaseRef.child(`users/${uid}/todos`).push(todo);
     return todoRef.then(() => {
       dispatch(addTodo({
           ...todo,
@@ -30,7 +31,8 @@ export var addTodo = (todo) => {
 
 export var startInitializeTodos = () => {
   return (dispatch, getState) => {
-    return firebaseRef.child('todos').once('value').then((snapshot) => {
+    var uid = getState().auth.uid;
+    return firebaseRef.child(`users/${uid}/todos`).once('value').then((snapshot) => {
       var initialTodos = [];
       var todoKeysObject = snapshot.val() || {};
       var todoKeysArray = Object.keys(todoKeysObject);
@@ -39,12 +41,15 @@ export var startInitializeTodos = () => {
         initialTodos = [...initialTodos, {id: key, ...todoKeysObject[key]}]
       })
       dispatch(initializeTodos(initialTodos));
+    }, (error) => {
+      console.log('error in startInitializeTodos: ', error);
+    }).catch((error) => {
+      console.log('in catch, error: ', error);
     });
   }
 };
 
 export var initializeTodos = (todos) => {
-
   return {
     type: 'INITIALIZE_TODOS',
     initialTodos: todos
@@ -67,7 +72,8 @@ export var toggleShowCompleted = () => {
 export var startToggleTodo = (id, completed) => {
 
   return (dispatch, getState) => {
-    var todoRef = firebaseRef.child('todos/' + id);
+    var uid = getState().auth.uid;
+    var todoRef = firebaseRef.child(`users/${uid}/todos/${id}`);
     var updates = {
       completed: completed,
       completedAt: completed? moment().unix(): null
@@ -112,6 +118,7 @@ export var startLogout = () => {
 }
 
 export var login = (uid) => {
+  console.log('in actions.login(), uid: ', uid);
   return {
     type: 'LOGIN',
     uid
