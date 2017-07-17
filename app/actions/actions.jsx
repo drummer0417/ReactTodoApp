@@ -94,18 +94,11 @@ export var updateTodo = (id, updates)  => {
 
 export var startLogin = () => {
   return (dispatch, getState) => {
-    console.log('before call firebase');
     return firebase.auth().signInWithPopup(githubProvider).then((result) => {
-      console.log('user.uid', result.user.uid);
       // dispatch(login(result.user.uid));
     }, (error) => {
       console.log('Unable to authenticate: ', error);
     });
-    // return firebase.auth().signInWithRedirect(githubProvider).then((result) => {
-    //   console.log('Authentication OK: ', result);
-    // }, (error) => {
-    //   console.log('Unable to authenticate: ', error);
-    // });
   };
 }
 
@@ -117,9 +110,7 @@ export var startLogout = () => {
   }
 }
 
-export var login = (uid) => {
-  console.log('in actions.login(), uid: ', uid);
-  return {
+export var login = (uid) => {  return {
     type: 'LOGIN',
     uid
   }
